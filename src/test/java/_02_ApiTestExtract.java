@@ -79,4 +79,61 @@ public class _02_ApiTestExtract {
         Assert.assertTrue(limit==10);
     }
 
+
+    @Test
+    public void extractingJsonPath5(){
+
+        List<Integer> idler=
+                given()
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        .extract().path("data.id");
+        ;
+
+        System.out.println("idler = " + idler);
+    }
+
+
+    @Test
+    public void extractingJsonPath6(){
+        // yukarıdaki testten sonra aynı endpointin sonunda dönen bütün name leri yazdırınız.
+        List<String> names=
+                given()
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        .extract().path("data.name");
+        ;
+
+        System.out.println("names = " + names);
+    }
+
+
+    @Test
+    public void extractingJsonPathResponsAll(){
+
+        Response donenData=
+                given()
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+                        .then()
+                        .extract().response()
+                ;
+
+        List<Integer> idler= donenData.path("data.id");
+        List<String> isimler= donenData.path("data.name");
+        int limit = donenData.path("meta.pagination.limit");
+
+        System.out.println("idler = " + idler);
+        System.out.println("isimler = " + isimler);
+        System.out.println("limit = " + limit);
+
+        Assert.assertTrue(isimler.contains("Mahesh Menon"));
+        Assert.assertTrue(idler.contains(5599126));
+        Assert.assertTrue(limit==10);
+
+    }
 }

@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class ZippoTest {
+public class _01_ApiTest {
     @Test
     public void test1() {
         given()

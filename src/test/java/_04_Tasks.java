@@ -1,4 +1,5 @@
 //import Model.ToDo;
+import Model.ToDo;
 import io.restassured.http.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -51,7 +52,7 @@ public class _04_Tasks {
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("completed", equalTo(false))
+                .body("completed", equalTo(false)) // true dersen hata verir buda negatif test olur
         ;
 
         // b)
@@ -75,19 +76,23 @@ public class _04_Tasks {
      * Converting Into POJO
      */
 
-//    @Test
-//    public void task3() {
-//
-//        ToDo todo=
-//                given()
-//                        .when()
-//                        .get("https://jsonplaceholder.typicode.com/todos/2")
-//
-//                        .then()
-//                        .statusCode(200)
-//                        .extract().body().as(ToDo.class)
-//                ;
-//
-//        System.out.println("todo = " + todo);
-//    }
+    @Test
+    public void task3() {
+
+        ToDo todo=
+                given()
+                        .when()
+                        .get("https://jsonplaceholder.typicode.com/todos/2")
+
+                        .then()
+                        .statusCode(200)
+                        .extract().body().as(ToDo.class)
+                ;
+
+        System.out.println("todo = " + todo);
+    }
+
+
+
 }
+
